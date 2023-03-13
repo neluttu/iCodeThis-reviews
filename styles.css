@@ -39,7 +39,7 @@ body {
     border-radius: 15px;
     min-height: 200px;
     margin: 10px;
-    max-height: 920px;
+    max-height: 820px;
 }
 
 h1 {
@@ -88,6 +88,12 @@ input[type=text] {
 }
 
 .topics.active {
+    background-color: #7e7af3;
+    color: white;
+    cursor: pointer;
+}
+
+.topics:active {
     background-color: #7e7af3;
     color: white;
     cursor: pointer;
@@ -200,4 +206,26 @@ use:nth-child(5) {
     height: 20px;
     margin: 0.75rem auto;
     width: 100px;
+}
+
+@media only screen and (max-width: 480px) { 
+    .content {
+        padding: 15px;
+    }
+}
+
+.social {
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: right;
+    padding: 10px;
+}
+
+
+.social svg {
+    cursor: pointer;
+    transition: all .3s ease;
+}
+.social svg:hover {
+    stroke: #7e7af3;
 }

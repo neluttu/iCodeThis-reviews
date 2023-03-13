@@ -12,17 +12,55 @@
         <link href="styles.css" rel="stylesheet" media="all" type="text/css">
     </head>
     <body>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.social').hide();
+                $('.review:not(.Design)').hide();
+
+                $('.topics').click( function() {
+                    $('.topics').removeClass('active');
+                    $(this).toggleClass('active');
+                    
+
+                    var getClass = $(this).data('class');
+
+                    $('.' + getClass).show();
+
+                    $('.review:not(.' + getClass + ')').hide();
+                });
+                
+                $('.share').click(function() {
+                    $('.social').slideUp();
+                    $(this).parent('.review').find('.social').slideToggle();
+
+                });
+
+            $("#filter").keyup(function(){
+                var filter = $(this).val(), count = 0;
+                var regex = new RegExp(filter, "i");
+
+                $(".content .review").each(function(){
+                    if ($(this).text().search(regex) < 0)
+                        $(this).hide();
+                    else {
+                        $(this).show();
+                        count++;
+                    }
+                    });
+                });
+            });
+        </script>
         <div id="main">
             <div class="content">
                 <h1>Reviews</h1>
-                <input type="text" placeholder="Search reviews">
-                <span class="topics">Experience</span>
-                <span class="topics">Quality</span>
-                <span class="topics active">Design</span>
-                <span class="topics">Size</span>
-                <span class="topics">Features</span>
-                <span class="topics">Value</span>
-                <span class="topics">Replacement</span>
+                <input type="text" placeholder="Search reviews" id="filter">
+                <span class="topics" data-class="Experience">Experience</span>
+                <span class="topics" data-class="Quality">Quality</span>
+                <span class="topics active" data-class="Design">Design</span>
+                <span class="topics" data-class="Size">Size</span>
+                <span class="topics" data-class="Features">Features</span>
+                <span class="topics" data-class="Value">Value</span>
+                <span class="topics" data-class="Replacement">Replacement</span>
                 <br><br><br>
                 <svg id="stars" style="display: none;" version="1.1">
                     <symbol id="stars-empty-star" viewBox="0 0 102 18" fill="#F1E8CA">
@@ -36,7 +74,7 @@
                       <path d="M9.5 14.25l-5.584 2.936 1.066-6.218L.465 6.564l6.243-.907L9.5 0l2.792" />
                     </symbol>
                 </svg>
-                <div class="review">
+                <div class="review Design">
                     <div class="ratings">
                         <svg aria-hidden="true" focusable="false" class="rating">
                             <use xlink:href="#stars-full-star" />
@@ -52,6 +90,24 @@
                     <div class="name">Jesse Hopkins</div>
                     <br>
                     <span>Gorgeous design! Even more responsive than the previous version. A pleasure to use!</span>
+                    <div class="social">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#83819d" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+                          </svg>
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#83819d" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+                          </svg>
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#83819d" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <rect x="4" y="4" width="16" height="16" rx="2" />
+                            <line x1="8" y1="11" x2="8" y2="16" />
+                            <line x1="8" y1="8" x2="8" y2="8.01" />
+                            <line x1="12" y1="16" x2="12" y2="11" />
+                            <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+                          </svg>
+                    </div>
                     <small>Feb 13, 2023</small>
                     <div class="share">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#83819d" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -63,7 +119,7 @@
                         Share
                     </div>
                 </div>
-                <div class="review">
+                <div class="review Design">
                     <div class="ratings">
                         <svg aria-hidden="true" focusable="false" class="rating">
                             <use xlink:href="#stars-full-star" />
@@ -79,7 +135,71 @@
                     <div class="name">Alice Banks</div>
                     <br>
                     <span>The device has a clean design, and the metal housing feels sturdy in my hands</span>
+                    <div class="social">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#83819d" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+                          </svg>
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#83819d" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+                          </svg>
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#83819d" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <rect x="4" y="4" width="16" height="16" rx="2" />
+                            <line x1="8" y1="11" x2="8" y2="16" />
+                            <line x1="8" y1="8" x2="8" y2="8.01" />
+                            <line x1="12" y1="16" x2="12" y2="11" />
+                            <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+                          </svg>
+                    </div>
                     <small>Feb 10, 2023</small>
+                    <div class="share">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#83819d" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+                            <polyline points="7 9 12 4 17 9" />
+                            <line x1="12" y1="4" x2="12" y2="16" />
+                          </svg>
+                        Share
+                    </div>
+                </div>
+
+                <div class="review Experience">
+                    <div class="ratings">
+                        <svg aria-hidden="true" focusable="false" class="rating">
+                            <use xlink:href="#stars-full-star" />
+                            <use xlink:href="#stars-full-star" />
+                            <use xlink:href="#stars-full-star" />
+                            <use xlink:href="#stars-full-star" />
+                            <use xlink:href="#stars-full-star" />
+                          </svg>
+                    </div>
+                    <div class="circle colorOne">
+                        <p class="circle-inner">J</p>
+                    </div>
+                    <div class="name">Jesse Hopkins</div>
+                    <br>
+                    <span>Gorgeous design! Even more responsive than the previous version. A pleasure to use!</span>
+                    <div class="social">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#83819d" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+                          </svg>
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#83819d" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+                          </svg>
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#83819d" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <rect x="4" y="4" width="16" height="16" rx="2" />
+                            <line x1="8" y1="11" x2="8" y2="16" />
+                            <line x1="8" y1="8" x2="8" y2="8.01" />
+                            <line x1="12" y1="16" x2="12" y2="11" />
+                            <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+                          </svg>
+                    </div>
+                    <small>Feb 13, 2023</small>
                     <div class="share">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#83819d" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
